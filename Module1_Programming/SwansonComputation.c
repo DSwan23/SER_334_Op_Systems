@@ -1,7 +1,7 @@
 /**
 * (basic description of the program or class)
 *
-* Completion time: (estimation of hours spent on this program)
+* Completion time: 1.0 hour
 *
 * @author Douglas Swanson, Ruben Acuna
 * @version 1.0
@@ -12,33 +12,12 @@
 #include <stdio.h>
 #include <math.h>
 
-// Write a C program to implement the algorithm as a function termination
-// that is called from main [ 4 points]
-int termination(int n)
-{
-    // Local variables
-    int count = 0;
-    // perform the collatz conjecture
-    while(n != 1)
-    {
-        if(n%2 == 0)
-        {
-            n = n/2;
-        }
-        else
-        {
-            n = 3*n+1;
-        }
-        count = count + 1;
-    }
-    // return the number of iterations
-    return count;
-}
+
 
 int main(void)
 {
     // Local variables
-    int numCylinders, index, collatzNum, collatzIterations;
+    int numCylinders, index;
     float height, radius, totalVolume;
     //Add a prompt for the number of cylinders to sum. Make sure to use the control
     //symbol for integers. [2 points]
@@ -63,13 +42,6 @@ int main(void)
     //symbol. [2 points]
     printf("The total volume of the cylinders is %f. \n", totalVolume);
     
-    // Call termination passing a number input from the user
-    printf("What number would you like to test the collatz conjecture against? Number = ");
-    scanf("%d", &collatzNum);
-    // Perform the algorithm on the number passed
-    collatzIterations = termination(collatzNum);
-    // Display the value to the user
-    printf("The integer %d took %d iterations to solve", collatzNum, collatzIterations);
     // Return a 0 to indicate the main method is done running
     return 0;
 }

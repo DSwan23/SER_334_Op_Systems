@@ -1,10 +1,10 @@
 /**
-* (basic description of the program or class)
+* Decrypts character chunks
 *
-* Completion time: (estimation of hours spent on this program)
+* Completion time: 0.75 hours
 *
-* @author (your name), (anyone else, e.g., Acuna, whose code you used)
-* @version (a version number or a date)
+* @author Swanson, Acuna
+* @version 1.0
 */
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,8 +67,25 @@ void sort_chunks() {
 	//      suggest selection sort), sort the array containing the message chunks.
 	//      Sort based on the first character in the chunk - it will always be a
 	//      number. We provide a swap_strings function that you may use. Example
-    //      usage: swap_strings(chunks[0], chunks[1]) will swap the contents of
+        //      usage: swap_strings(chunks[0], chunks[1]) will swap the contents of
 	//      the first and second string.
+    // Local variables
+    int index, innerIndex;
+    // Loop through the all of the chunks
+    for(index = 0; index < sizeof(chunks)/sizeof(chunks[0]); index++)
+    {
+        // loop through the rest of the chunks
+        for(innerIndex = index + 1; innerIndex < sizeof(chunks)/sizeof(chunks[0]); innerIndex++)
+        {
+            // Compare the first index of the stored value (always integers)
+            if(chunks[index][0] > chunks[innerIndex][0])
+            {
+                // Swap the indices
+                swap_strings(&chunks[index], &chunks[innerIndex]);
+            }
+        }
+    }
+    
 }
 
 //for each string in the global chunks variable, shifts the characters in it by
@@ -83,6 +100,22 @@ void decrypt_chunks() {
 	//		to the active chunk[?] in the outer loop but before the inner loop.
 	//		Then the inner loop is only concerned with a single array of
 	//		characters rather than an array of strings.)
+    // Local variables
+    int index;
+    // Loop through the all of the chunks
+    for(index = 0; index < sizeof(chunks)/sizeof(chunks[0]); index++)
+    {
+        // Setup the pointer to the current string
+        char* strPtr = &chunks[index];
+        // Loop over characters in the string
+        while(*strPtr)
+        {
+            // Subtract the DECRYPTION_SHIFT to decrypt
+            *strPtr = *strPtr - DECRYPTION_SHIFT;
+            // Go to the next character
+            strPtr++;
+        }
+    }
 }
 
 
@@ -92,4 +125,23 @@ void display_chunks() {
 	//      message chunks (strings) and print it. Do not print the first
 	//      character in each string since it is only used to store the order of
 	//      the chunks. (Hint: use pointer arithmetic to skip a character.)
+    // Local variables
+    int index1;
+    // Loop over the chunks
+    for(index1 = 0; index1 < sizeof(chunks)/sizeof(chunks[0]); index1++)
+    {
+        // Setup the point to the current string
+        char* strPtr = &chunks[index1];
+        // Loop over the string, skip the first character
+        strPtr++;
+        while(*strPtr)
+        {
+            // Print out the character
+            printf("%c", *strPtr);
+            // Go to the next character
+            strPtr++;
+        }
+        // Print a new line
+        printf("\n");
+    }
 }

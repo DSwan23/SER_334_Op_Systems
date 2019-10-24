@@ -35,8 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/ser334_unit1_hw02a_base.o \
-	${OBJECTDIR}/ser334_unit1_hw02c_base.o
+	${OBJECTDIR}/SwansonCollatz.o \
+	${OBJECTDIR}/SwansonComputation.o \
+	${OBJECTDIR}/SwansonDecrypt.o
 
 
 # C Compiler Flags
@@ -63,15 +64,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/module1_programming: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/module1_programming ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/ser334_unit1_hw02a_base.o: ser334_unit1_hw02a_base.c
+${OBJECTDIR}/SwansonCollatz.o: SwansonCollatz.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ser334_unit1_hw02a_base.o ser334_unit1_hw02a_base.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SwansonCollatz.o SwansonCollatz.c
 
-${OBJECTDIR}/ser334_unit1_hw02c_base.o: ser334_unit1_hw02c_base.c
+${OBJECTDIR}/SwansonComputation.o: SwansonComputation.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ser334_unit1_hw02c_base.o ser334_unit1_hw02c_base.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SwansonComputation.o SwansonComputation.c
+
+${OBJECTDIR}/SwansonDecrypt.o: SwansonDecrypt.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SwansonDecrypt.o SwansonDecrypt.c
 
 # Subprojects
 .build-subprojects:
