@@ -20,12 +20,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 //DATA STRUCTURES
 // Subjects enumeration
-enum { SER=0, EGR, CSE, EEE } Subjects;
+typedef enum { SER=0, EGR, CSE, EEE } subjects;
 
 // Course Node Struct, for linking of lists lol
 struct CourseNode 
 {
-    typedef enum Subjects subject;
+    subjects Subject;
     int number;
     int creditHours;
     char teacher[1024];
@@ -71,7 +71,17 @@ int main() {
 		branching(input_buffer);
 	} while (input_buffer != 'q');
         
-        // Clean up memory to prevent leaking
+        // Clean up memory to prevent leaking, loop through schedule
+        while(course_collection)
+        {
+            // Store the current node for memory cleanup
+            struct CourseNode* deleteMe = course_collection;
+            // Move on to the next node
+            course_collection = course_collection->next;
+            // Remove the current node
+            free(deleteMe);
+        }
+        
 
 	return 0;
 }
@@ -110,7 +120,8 @@ void course_insert()
     // Creating a new course message
     printf(" -- Creating a new course! -- \n");
     // Local variables
-    struct CourseNode* new_node, current_list = course_collection;
+    struct CourseNode* new_node;
+    struct CourseNode* current_list = course_collection;
     int subject_num, course_num, credits;
     char instruct[1026];
     // Prompt the user for the course subject
@@ -130,10 +141,10 @@ void course_insert()
     scanf("%c", &instruct);
     printf("\n");
     // Populate the struct node
-    new_node->subject = subject_num;
+    new_node->Subject = subject_num;
     new_node->number = course_num;
     new_node->creditHours = credits;
-    new_node->teacher = instruct;
+    strcpy(instruct, new_node->teacher);
     // Check to see if the schedule is empty
     if(current_list == NULL)
     {
@@ -143,13 +154,13 @@ void course_insert()
     else
     {
         // Place the node at the end of the list
-        while(*current_list->next != NULL)
+        while(current_list->next != NULL)
         {
             // Go to the next node
             current_list = current_list->next;
         }
         // The last node has been reached, add the new node
-        current_list.next = &new_node;
+        current_list->next = &new_node;
     }
     // Inform the user that the new class has been added to the schedule
     printf("The course has been added to the schedule. \n");
@@ -168,17 +179,17 @@ void schedule_print()
     // Local variables
     struct CourseNode* current_course = course_collection;
     // Loop through the course nodes
-    while(*current_course)
+    while(current_course)
     {
         // Loop variables
-        char subject_str[];
+        char* subject_str[4];
         // Convert the enumeration to a string
-        switch(current_course)
+        switch(current_course->Subject)
         {
-            case 0: subject_str = "SER";
-            case 1: subject_str = "EGR";
-            case 2: subject_str = "CSE";
-            case 3: subject_str = "EEE";
+            case 0: strcpy(subject_str, "SER");
+            case 1: strcpy(subject_str, "EGR");
+            case 2: strcpy(subject_str, "CSE");
+            case 3: strcpy(subject_str, "EEE");
         }
         // Create the output
         printf("%c%d %d %c", subject_str, current_course->number, 
@@ -194,6 +205,68 @@ void schedule_print()
 // that the course doesn't exist.
 void course_drop()
 {
-   // Local variables
-   
+    // Check to see if the schedule has any courses in it
+    if(course_collection == NULL)
+    {
+        // Inform the user then return
+        printf("There are not any courses in the schedule to remove!");
+        return;
+    }
+    // Local variables
+   struct CourseNode* current_course = course_collection;
+   int course_num;
+   struct CourseNode* deleteMe;
+    // Ask the user for the course number
+   printf("What is the number of the course to remove? \n");
+   scanf("%d", &course_num);
+   printf("\n");
+   // Check the first course
+   if(current_course->number == course_num)
+   {
+       // Store this for memory cleanup
+       deleteMe = current_course;
+       // check if there is another course
+       if(current_course->next == NULL)
+       {
+           // Clear the schedule
+           course_collection == NULL;
+       }
+       // Set the next course at the front
+       course_collection = current_course->next;
+       // Clean up memory
+       free(deleteMe);
+       // Inform the user
+       printf("The course has been removed");
+       // return
+       return;
+   }
+   // Loop through the schedule
+   while(current_course -> next != NULL)
+   {
+       // Check the course number on the current node
+       if(current_course->next->number == course_num)
+       {
+           // Store the next node for memory cleanup
+           deleteMe = current_course->next;
+           // Check to see if the next course has a next course
+           if(current_course->next->next == NULL)
+           {
+               // Set the current node's next to null
+               current_course->next = NULL;
+           }
+           else
+           {
+               // set the next next course as the next
+               current_course->next = current_course->next->next;
+           }
+           // Remove the next course from memory
+           free(deleteMe);
+           // Inform the user the course has been removed
+           printf("Course has been removed");
+           // Return
+           return;
+       }
+   }
+   // Inform the user that the course could not be found
+   printf("The course cannot be deleted, it is not in the schedule!");   
 }
