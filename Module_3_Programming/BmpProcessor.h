@@ -1,9 +1,25 @@
+#ifndef BMP_PROCESSOR_H
+#define BMP_PROCESSOR_H
 struct BMP_Header {
-	//TODO:Finish struct
+    char signature[2];  // ID Field
+    int size;           // Size of the BMP File
+    int offset;         // Offset where the pixel array can be found
+    short reserved1;    // Program specific
+    short reserved2;    // Program specific 2
 };
 
 struct DIB_Header{
-	//TODO:Finish struct
+    int size;               // Number of bytes in the DIB header
+    int width;              // The width of the bitmap (in pixels)
+    int height;             // The height of the bitmap (in pixels)
+    int num_color_planes;   // The number of color planes being used
+    int num_bits_per_pixel; // The number of bits per pixel
+    short compression;        // The compression mode being used
+    short size_raw_data;      // The size of the raw bitmap data
+    int print_res_horizontal;// The resolution of the image should it be printed
+    int print_res_vertical;
+    int palette_color_count;// The number of colors in the palette
+    int important_colors;   // The number of important colors used, typically 0
 };
 
 /**
@@ -80,3 +96,5 @@ void readPixelsBMP(FILE* file, struct Pixel** pArr, int width, int height);
  * @param  height: Height of the image that this header is for
  */
 void writePixelsBMP(FILE* file, struct Pixel** pArr, int width, int height);
+
+#endif BMP_PROCESSOR_H

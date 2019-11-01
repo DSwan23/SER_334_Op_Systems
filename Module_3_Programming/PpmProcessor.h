@@ -1,5 +1,11 @@
+#ifndef PPM_PROCESSOR_H
+#define PPM_PROCESSOR_H
 struct PPM_Header{
-	//TODO:Finish struct
+    char magic_number[2];   // The ppm image magic number
+    int width;              // The width of the ppm image
+    int height;             // The height of the ppm image
+    int maximum_color;      // The maximum color value
+    char whitespace[1];     // Whitespace storage
 };
 
 /**
@@ -47,3 +53,5 @@ void readPixelsPPM(FILE* file, struct Pixel** pArr, int width, int height);
  * @param  height: Height of the image that this header is for
  */
 void writePixelsPPM(FILE* file, struct Pixel** pArr, int width, int height);
+
+#endif PPM_PROCESSOR_H

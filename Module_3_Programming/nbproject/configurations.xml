@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>BmpProcessor.h</itemPath>
+      <itemPath>PixelProcessor.h</itemPath>
+      <itemPath>PpmProcessor.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -12,7 +15,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>main.c</itemPath>
+      <itemPath>BmpProcessor.c</itemPath>
+      <itemPath>PpmProcessor.c</itemPath>
+      <itemPath>SwansonImageProcessor.c.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -39,7 +44,17 @@
           <standard>10</standard>
         </cTool>
       </compileType>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="BmpProcessor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="BmpProcessor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PixelProcessor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PpmProcessor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="PpmProcessor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SwansonImageProcessor.c.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -63,7 +78,17 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="main.c" ex="false" tool="0" flavor2="0">
+      <item path="BmpProcessor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="BmpProcessor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PixelProcessor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="PpmProcessor.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="PpmProcessor.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SwansonImageProcessor.c.c" ex="false" tool="0" flavor2="0">
       </item>
     </conf>
   </confs>
