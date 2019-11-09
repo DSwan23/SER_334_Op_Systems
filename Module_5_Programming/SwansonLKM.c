@@ -26,41 +26,44 @@ void display_processes(void)
 	// Loop through the processes in the scheduled task
 	for_each_process( task )
 	{
-		// Print the current task header
-		printk(KERN_INFO "PROCESS\t\tPID\t\tSTATE\t\tPRIO\t\tST_PRIO\t\tNORM_PRIO\n");
-		// Print out this process information
-		printk(KERN_INFO "%s\t\t%d\t\t%ld\t\t%d\t\t%d\t\t%d", task->comm, task->pid, task->state, task->prio, task->static_prio, task->normal_prio);
-		// Check for a Parent task
-		if(task->parent != NULL)
+		if(task->pid >= startPID)
 		{
-			// Local Parent Task
-			struct task_struct* parent = task->parent;
-			// Print Parent Header
-			printk(KERN_INFO "PARENT");
-			// Print Parent Information
-			printk(KERN_INFO "%s\t\t%d\t\t%ld\t\t%d\t\t%d\t\t%d", parent->comm, parent->pid, parent->state, parent->prio, parent->static_prio, parent->normal_prio);
-		}
-			// Child Header Flag
-			int header = 0;
-			
-			// Loop thorugh all of the children processes
-			list_for_each( iterateList, &task->children)
+			// Print the current task header
+			printk(KERN_INFO "PROCESS\t\tPID\t\tSTATE\t\tPRIO\t\tST_PRIO\t\tNORM_PRIO\n");
+			// Print out this process information
+			printk(KERN_INFO "%s\t\t%d\t\t%ld\t\t%d\t\t%d\t\t%d", task->comm, task->pid, task->state, task->prio, task->static_prio, task->normal_prio);
+			// Check for a Parent task
+			if(task->parent != NULL)
 			{
-				// Check to see if the header has been printed
-				if(header == 0)
-				{
-					// print the header
-					printk(KERN_INFO "CHILDREN");
-					// change the flag
-					header = 1;
-				}
-				// Get the child information using the list entry
-				struct task_struct* child = list_entry(iterateList, struct task_struct, sibling);
-				// Print child Information
-				printk(KERN_INFO "%s\t\t%d\t\t%ld\t\t%d\t\t%d\t\t%d", child->comm, child->pid, child->state, child->prio, child->static_prio, child->normal_prio);
+				// Local Parent Task
+				struct task_struct* parent = task->parent;
+				// Print Parent Header
+				printk(KERN_INFO "PARENT");
+				// Print Parent Information
+				printk(KERN_INFO "%s\t\t%d\t\t%ld\t\t%d\t\t%d\t\t%d", parent->comm, parent->pid, parent->state, parent->prio, parent->static_prio, parent->normal_prio);
 			}
-		// Asthetic Spacing
-		printk("\n=================================================================================================\n");
+				// Child Header Flag
+				int header = 0;
+				
+				// Loop thorugh all of the children processes
+				list_for_each( iterateList, &task->children)
+				{
+					// Check to see if the header has been printed
+					if(header == 0)
+					{
+						// print the header
+						printk(KERN_INFO "CHILDREN");
+						// change the flag
+						header = 1;
+					}
+					// Get the child information using the list entry
+					struct task_struct* child = list_entry(iterateList, struct task_struct, sibling);
+					// Print child Information
+					printk(KERN_INFO "%s\t\t%d\t\t%ld\t\t%d\t\t%d\t\t%d", child->comm, child->pid, child->state, child->prio, child->static_prio, child->normal_prio);
+				}
+			// Asthetic Spacing
+			printk("\n=================================================================================================\n");
+		}
 	}
 }
 
