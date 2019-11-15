@@ -9,6 +9,21 @@ struct BMP_Header {
 };
 
 struct DIB_Header{
+    int size;                       // Number of bytes in the DIB header
+    int img_width;                  // The width of the bitmap (in pixels)
+    int img_height;                 // The height of the bitmap (in pixels)
+    short num_color_planes;         // The number of color planes being used
+    short num_bits_per_pixel;       // The number of bits per pixel
+    int compression;                // The compression mode being used
+    int size_img_data;              // The size of the raw bitmap data
+    int pixels_per_meter_x;         // The numbers of pixels in a meter, x 
+    int pixels_per_meter_y;         // The numbers of pixels in a meter, y
+    int palette_color_count;        // The number of colors in the palette
+    int color_table_color_count;    // The number of colors in the color table
+    int important_colors;           // The number of important colors used, typically 0
+};
+
+struct DIB_Header{
     int size;               // Number of bytes in the DIB header
     int width;              // The width of the bitmap (in pixels)
     int height;             // The height of the bitmap (in pixels)
