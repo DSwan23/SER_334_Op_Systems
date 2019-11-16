@@ -34,7 +34,10 @@ include Makefile
 OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
-OBJECTFILES=
+OBJECTFILES= \
+	${OBJECTDIR}/InstanceHost.o \
+	${OBJECTDIR}/LoadBalancer.o \
+	${OBJECTDIR}/User.o
 
 
 # C Compiler Flags
@@ -60,6 +63,21 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/module_7_programming: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/module_7_programming ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/InstanceHost.o: InstanceHost.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/InstanceHost.o InstanceHost.c
+
+${OBJECTDIR}/LoadBalancer.o: LoadBalancer.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LoadBalancer.o LoadBalancer.c
+
+${OBJECTDIR}/User.o: User.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/User.o User.c
 
 # Subprojects
 .build-subprojects:
