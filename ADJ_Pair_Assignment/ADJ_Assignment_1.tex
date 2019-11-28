@@ -123,12 +123,65 @@
         \\
         % Analysis
         \subsection{Analysis (A)}
+        Insertion sort and selection sort are two types of sorting algorithms, typically used by programmers to sort arrays of elements. 
+        Insertion sort compares two elements in an array that are next to each other and places the value that is less than to the left. 
+        This comparison is done within a loop and the loop exits as soon as the value being sorted is greater than an element to the left 
+        of it. The algorithm will proceed through the entire array until it is completely sorted from a minimum value to a maximum value. \\
+        \\
+        Selection sort is similar in that it compares elements within an array. However, selection sort will search through the entire array 
+        to find the minimum value using a loop, then place the minimum value to the front of the array and move everything else down. Once 
+        the selection sort algorithm has placed the minimum value down it increments the loop, thus separating the array into a sorted and an 
+        unsorted section. The algorithm will search through the array again to find a new minimum value and then place that into the next 
+        position in the array, and so on. \\
+        \\
+        Insertion sort and selection sort algorithms both have an average case of O(n2) for comparisons, while insertion sort has an average 
+        case of O( n2) for swaps and selection sort has O( n ) for swaps. This means that when sorting an array, the amount of time taken to 
+        compare values is a quadratic function of the number of elements within the array and for a very large array, these sorting algorithms 
+        can take a very long time to complete. For swapping, it is quadratic for insertion sort and linear for selection sort. We begin to look 
+        for a solution to this conundrum: how can we make these sorting algorithms faster? \\
+        \\
+        One option is parallelism, the splitting up of a process into smaller parts in order to have separate processors working on the same problem 
+        at the same time. This act is sometimes referred to as “dividing and conquering”. In terms of the insertion sort and selection sort algorithms, 
+        it should be possible to divide the array that needs to be sorted into equal parts and have different processes sort the divided parts. 
+        However, the question “which would be more amenable to parallelism” remains. \\
+        \\
 
         % Design
         \subsection{Design (D)}
+        The answer is not so simple: we can divide both of these algorithms into smaller parts and sort each of the divided parts. 
+        The design for the solution is as follows: we can divide the arrays into the number of processors we wish to use to work on
+        the sorting algorithm; we can sort the arrays using the algorithms; we can join the divided parts together again and sort the
+        final array. \\
+        \\
+        As stated before in the analysis, both algorithms have an average case of O(n2) for comparisons, but in terms of swapping, 
+        selection sort has a linear function of time while insertion sort has a quadratic function of time. This leads us to believe
+        that on average, the selection sort will be faster. However, the best case for insertion sort is O(n) for comparisons and O ( 1 ) 
+        for swapping. O( 1 ) is a constant value, and is considered to be the fastest speed possible of sorting algorithms. This best case
+        for insertion sort occurs when the array is already sorted, because there does not need to be any swapping at all. \\
+        \\
+        For selection sort, there is no ideal situation. No matter how the array is sorted in the beginning, the time for comparisons will
+        always be O( n2) and will always be O( n ) for swapping. This is because selection sort goes through the entire array to find the
+        minimum value, no matter what order the array is in. \\
+        \\
+        This leads us to parallelism and what parallelism can do for our sorting algorithms. Breaking down the array that we need to sort 
+        into smaller parts will allow more processors to work on sorting. If we run both sorting algorithms on the smaller parts, the average 
+        values for comparisons and swapping will remain the same: selection sort will have an edge on swapping with its linear value. \\
+        \\
+        When we finish sorting the smaller parts, putting the parts together becomes the deciding factor. Since the smaller parts are already 
+        sorted, when sorting the smaller parts into one large array, it will be easier for insertion sort. Selection sort will still have to 
+        work through the entire array for each element in the array. However, insertion sort will have an easier time since the array is already 
+        partially sorted. Insertion sort will very nearly have its best case of O( n ) for comparisons and O( 1 ) for swapping. \\
+        \\
 
         % Justification
         \subsection{Justification (J)}
+        Ultimately, dividing the work among the processors will speed up both sorting algorithms. However, one type of sorting 
+        algorithm is more amenable because it has a special trait that gives it an advantage against other sorting algorithms. 
+        Insertion sort does not have to run through the entire array before moving an element in the array. In the analysis, it 
+        is stated that insertion sort only compares an element to its neighbor, while selection sort compares all elements until it 
+        finds the minimum value. While dividing up an array and using selection sort is an option, insertion sort is preferable because
+         it will take less time when putting the smaller portions of the array back together. \\
+         \\
 
     % Put question 3 here
     \section{Question 3: Threads}
@@ -143,10 +196,52 @@
         \\
         % Analysis
         \subsection{Analysis (A)}
-
+        The five issues of multicore programming are: Balance, Data Splitting, Data Dependency, and Testing and Debugging. Balance is breaking the task into 
+        equal size chunks so that each thread has a similar amount of work to complete. Data splitting is figuring out how to break up the data up so that each
+        thread gets the data that it requires to complete the task at hand. On to data dependency which is the association between the data in question that can
+        make splitting the data up evenly because some data requires other data. Finally the testig and debugging is how each thread will be tested in order to
+        ensure that it is producing the correct response and if it isn't then how will the threads be debuged in order to find out why it is producing an anomlous 
+        result. The program will determine how to split the data in a balanced manner in such a way that can be easily tested and debugged without breaking any data
+        dependencies.\\
+        \\
+        A video file is a series of similar images with minor changes between them, as stated in the problem. The threading system needs to beable to determine the
+        similar images and store only the portions that are different between them. The similar portion of the images will be stored only once to reduce the amount 
+        of memory used, thus compressing the file. The threads should be assigned a series of similar images and operate upon them to find the similarities. Once the
+        video is decompressed the changes will be applied to the similar image to create the series of images once again. \\
+        \\
+        Multicore programming is difficult and multithreading is problematic, but with this analysis we will determine the most problematic of the five issues stated. \\
+        \\
         % Design
         \subsection{Design (D)}
-
+        The first step is identifying tasks for the multithreaded program, which is relatively easy. In this instance of the video file, the video is broken up into 
+        frames and each frame is broken into pixels. We could break the frame into a 2D array of pixels and compare the pixels of one frame to the next, identifying 
+        any changes found. That is a lot of work for a program to do on its own and would take a lot of time, which leads to balancing.\\
+        \\
+        For balancing, we could break the array of pixels into layers and have different threads work on an equal portion of layers. This way, each processor working 
+        on the task will do a comparable amount of work. This cuts down on the time needed for the program to work, relative to the number of processors on the system 
+        being used. \\
+        \\
+        For data splitting, since we are looking only for the data that is changing with each frame in the video, we can remove all copies of the data from memory. 
+        Memory is a finite resource, and so each thread need only save the data that is changing. This will compress the file greatly, saving time during uploading 
+        and downloading. \\
+        \\
+        In terms of data dependency, there are some things that cannot be parallelized. In this situation, we are not splitting the video into a section of frames and 
+        having each processor work on a section of frames because it would be too costly, in terms of memory, to create that many large separate arrays in order to 
+        parallelize, when we could create a single array that is broken up into parts and worked on by multiple processors. While this method may take more time, since 
+        it is working on one frame, it will be less costly in terms of memory. \\
+        \\
+        Finally, testing and debugging, which is always troublesome. However, with multithreading, it becomes much more difficult, as it is more difficult to pinpoint an 
+        issue with many threads woven together. This will take the most time among the issues, as testing is the number one reason for cost and timing problems with a project. 
+        For this instance, we would need to test many different video files and when there are issues, it will be difficult to determine where they are occurring without 
+        properly splitting up and identifying the threads being used. \\
+        \\
         % Justification
         \subsection{Justification (J)}
+        Designing a choice requires a form of measurement, and in this instance we will determine the most problematic of the multicore programming issues using the time 
+        needed to solve these issues. We will use time because of the importance of deadlines to companies and clients and because time is money for all involved. \\
+        \\
+        Identifying the tasks, balancing, data splitting and data dependency are all relatively quick to work out. With the popularity of Agile programming, these things 
+        can be determined on the fly, during coding. However, testing and debugging will be the most problematic and time-consuming of the five issues and will cause the 
+        most headaches. \\
+        \\
 \end{document}
