@@ -12,6 +12,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>SwansonSJFL.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -38,6 +39,8 @@
           <standard>10</standard>
         </cTool>
       </compileType>
+      <item path="SwansonSJFL.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="1">
       <toolsSet>
@@ -60,6 +63,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="SwansonSJFL.c" ex="false" tool="0" flavor2="0">
+      </item>
     </conf>
   </confs>
 </configurationDescriptor>

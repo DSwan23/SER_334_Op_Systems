@@ -35,8 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/InstanceHost.o \
-	${OBJECTDIR}/LoadBalancer.o \
+	${OBJECTDIR}/SwansonInstanceHost.o \
+	${OBJECTDIR}/SwansonLoadBalancer.o \
 	${OBJECTDIR}/User.o
 
 
@@ -64,15 +64,15 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/module_7_programming: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/module_7_programming ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/InstanceHost.o: InstanceHost.c
+${OBJECTDIR}/SwansonInstanceHost.o: SwansonInstanceHost.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/InstanceHost.o InstanceHost.c
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SwansonInstanceHost.o SwansonInstanceHost.c
 
-${OBJECTDIR}/LoadBalancer.o: LoadBalancer.c
+${OBJECTDIR}/SwansonLoadBalancer.o: SwansonLoadBalancer.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LoadBalancer.o LoadBalancer.c
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SwansonLoadBalancer.o SwansonLoadBalancer.c
 
 ${OBJECTDIR}/User.o: User.c
 	${MKDIR} -p ${OBJECTDIR}

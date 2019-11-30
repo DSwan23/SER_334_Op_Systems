@@ -14,8 +14,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>InstanceHost.c</itemPath>
-      <itemPath>LoadBalancer.c</itemPath>
+      <itemPath>SwansonInstanceHost.c</itemPath>
+      <itemPath>SwansonLoadBalancer.c</itemPath>
       <itemPath>User.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -40,13 +40,13 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="InstanceHost.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="InstanceHost.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="LoadBalancer.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="LoadBalancer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SwansonInstanceHost.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="SwansonLoadBalancer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="User.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -71,13 +71,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="InstanceHost.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="InstanceHost.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="LoadBalancer.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="LoadBalancer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SwansonInstanceHost.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="SwansonLoadBalancer.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="User.c" ex="false" tool="0" flavor2="0">
       </item>

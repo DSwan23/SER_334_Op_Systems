@@ -35,7 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/BaseSchedule.o
+	${OBJECTDIR}/BaseSchedule.o \
+	${OBJECTDIR}/SwansonScheduler.o
 
 
 # C Compiler Flags
@@ -66,6 +67,11 @@ ${OBJECTDIR}/BaseSchedule.o: BaseSchedule.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BaseSchedule.o BaseSchedule.c
+
+${OBJECTDIR}/SwansonScheduler.o: SwansonScheduler.c
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SwansonScheduler.o SwansonScheduler.c
 
 # Subprojects
 .build-subprojects:
