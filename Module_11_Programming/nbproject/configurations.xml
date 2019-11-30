@@ -34,9 +34,6 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
-        <cTool>
-          <standard>10</standard>
-        </cTool>
       </compileType>
     </conf>
     <conf name="Release" type="1">
@@ -48,7 +45,6 @@
       <compileType>
         <cTool>
           <developmentMode>5</developmentMode>
-          <standard>10</standard>
         </cTool>
         <ccTool>
           <developmentMode>5</developmentMode>
