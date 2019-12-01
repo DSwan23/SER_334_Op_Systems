@@ -30,13 +30,15 @@ struct process_node
 };
 
 // Define the structure types
-typedef struct value_node value_node;
-typedef struct process_node process_node;
+typedef struct value_node value_node;       // Defining a type value to the struct defined above
+typedef struct process_node process_node;   // Defining a type value to the struct defined above
 
 // Global variables
-int tick_count = -1;    // How many ticks the simulation should run for
-int process_count = -1;  // How many processes to be used in this simulation
-struct process_node* process_list = NULL;
+int tick_count = -1;                // How many ticks the simulation should run for
+int process_count = -1;             // How many processes to be used in this simulation
+process_node* process_list = NULL;  // A list of the process defined by the input file
+value_node* turnaround_list = NULL; // A list of current turnaround times
+value_node* wait_list = NULL;       // A list of current wait times
 
 ////////////////////////////////////////////////////////////////////////////////
 //SUPPORTING FUNCTIONS
@@ -157,7 +159,7 @@ void read_file(char* file_path)
     if(file != NULL)
     {
         printf("Could not open the file specified! Check the file path and "
-                "try again");
+                "try again \n");
         exit(0);
     }
     
@@ -172,16 +174,17 @@ void read_file(char* file_path)
     // Check to see if the values were brought in successfully
     if(tick_count == -1)
     {
-        printf("Tick count read error");
+        printf("Tick count read error\n");
         exit(0);
     }
     if(process_count == -1)
     {
-        printf("process count read error");
+        printf("process count read error\n");
         exit(0);
     }
     
     // Read in the process data
+    populate_processes(file);
     
     // Close the file
     fclose(file);
@@ -191,7 +194,72 @@ void read_file(char* file_path)
         free(line);
 }
 
+void compute_tau(process_node* process, int previous_burst)
+{
+    // Compute a new tau value and replace the current
+    process->tau = process->alpha * previous_burst + (1 - process->alpha) * process->tau;
+}
 
+float compute_time_total(value_node* list)
+{
+    // Locl variables
+    float total = 0;
+    // Temp node to facilitate the walk through
+    value_node* temp = list;
+    // Walk through the list and add all of the node values together
+    while(temp != NULL)
+    {
+        // Add the value to the running total
+        total += temp->value;
+        // Move to the next node
+        temp = temp->next;
+    }
+    // Divide the total by the number of processes
+    total = (total / process_count);
+    // Return the computed value
+    return total;
+}
+
+void run_process(process_node* list)
+{
+    // Temp node to walk through list
+    process_node* temp = list;
+    // Walk through entire list
+    while(temp != NULL)
+    {
+        // Display the value on the UI
+        printf("\tProcess %d took %d.\n", temp->pid, temp->burst_list->value);
+        // Add turnaround time to the list
+        
+        // Add wait time to the list
+    }
+}
+
+void SJF()
+{
+    // Local variables
+    process_node* sorted_list;
+    int current_time = 0;
+    // Display the SJF header on the console
+    printf("========== Shortest - Job - First ==========\n");
+    // Walk through the simulation one tick at a time
+    for(int tick = 0; tick < tick_count; tick++)
+    {
+        // Display tick value on the console
+        printf("Simulating %d th tick of processes @ time %d:\n",
+                tick, current_time);
+        // Sort the processes by CPU burst value
+        
+        // Run each process in the sorted list
+        run_process(sorted_list);
+    }
+    // Compute and display the turnaround time
+    float time = compute_time_total(turnaround_list);
+    printf("Turnaround time :\t%g\n", time);
+    // Compute and display the wait time
+    time = compute_time_total(wait_list);
+    printf("Waiting time :\t%g\n", time);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 //MAIN PROGRAM CODE
